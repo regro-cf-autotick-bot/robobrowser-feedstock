@@ -1,24 +1,23 @@
 {% set name = "robobrowser" %}
 {% set version = "0.5.3" %}
-{% set sha256 = "31219acab41ca68adce928e5c1e04acebba4ceabeb447b9c5e408d7b30fee983" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 31219acab41ca68adce928e5c1e04acebba4ceabeb447b9c5e408d7b30fee983
 
 build:
   noarch: python
   number: 1
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - python {{ python_min }}
+    - setuptools
     - pip
   run:
     - python >={{ python_min }}
